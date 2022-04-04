@@ -9,25 +9,29 @@ import {
   NotificationProvider,
   darkTheme,
   GlobalStyles,
+  LoggerProvider,
 } from 'amazon-chime-sdk-component-library-react';
 
 import { AppStateProvider, useAppState } from './providers/AppStateProvider';
 import ErrorProvider from './providers/ErrorProvider';
 import Notifications from './containers/Notifications';
 import MeetingProviderWrapper from './containers/MeetingProviderWrapper';
+import meetingConfig from './meetingConfig';
 
 const App: FC = () => (
   <Router>
-    <AppStateProvider>
-      <Theme>
-        <NotificationProvider>
-          <Notifications />
-          <ErrorProvider>
-            <MeetingProviderWrapper />
-          </ErrorProvider>
-        </NotificationProvider>
-      </Theme>
-    </AppStateProvider>
+    <LoggerProvider logger={meetingConfig.logger}>
+      <AppStateProvider>
+        <Theme>
+          <NotificationProvider>
+            <Notifications />
+            <ErrorProvider>
+              <MeetingProviderWrapper />
+            </ErrorProvider>
+          </NotificationProvider>
+        </Theme>
+      </AppStateProvider>
+    </LoggerProvider>
   </Router>
 );
 
